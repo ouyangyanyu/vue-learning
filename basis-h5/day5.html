@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件注册</title>
+    <script src="vue.js"></script>
+<body>
+        <div id="root">
+            <div>
+                <input v-model="inputValue"/>
+                <button @click="submit">提交</button>
+            </div>
+            <ul>
+                <todo-item 
+                v-for="(item , index) of list"
+                :key="index" 
+                :content="item"></todo-item>
+            </ul>
+        </div>
+        <script>
+
+       // Vue.component('todo-item',{  //全局组件
+       //     template : "<li>item</li>"
+       // })
+
+        var TodoItem = { //局部组件
+            props : ['content'],
+            template : "<li>{{content}}</li>"
+        }
+
+
+            new Vue({
+                el : "#root",
+                components :{
+                    'todo-item' : TodoItem
+                },
+                data : {
+                    inputValue : 'hello',
+                    list : []
+                },
+                methods :{
+                    submit : function(){
+                        this.list.push(this.inputValue);
+                        this.inputValue = '';
+                    }
+                }
+            })
+        </script>
+</body>
+</head>

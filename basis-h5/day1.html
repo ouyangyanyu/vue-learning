@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <script src="vue.js"></script>
+<body>
+
+    <!-- 
+        挂载点，模板，实列之间的关系
+     -->
+    <div id="root"><!--挂载点下面的内容为模板内容-->
+        <h1>hello {{msg}}</h1><!--{{msg}}  这种叫插值表达式-->
+        <h1>hello {{num}}</h1>
+        <h1 v-html="num"></h1>
+        <div v-text="content"></div>  <!-- v-text和v-html的区别在于内容是否会转义-->
+        <div v-html="content"></div>
+        
+        <div v-on:click="handleClick">{{msg}}</div>
+        <!--
+            ==>  
+            <div @click="handleClick">{{msg}}</div>
+        -->
+        
+    </div>
+
+    <script>
+        new Vue({
+            el :"#root",
+            data :{
+                msg : "HelloWord",
+                num : 123,
+                content : "<h1> hello  </h1>"
+            },
+            methods :{
+                handleClick :function(){
+                    alert(123);
+                    this.msg  = "world"
+                }  
+            }
+        })
+    </script>
+</body>
+</head>

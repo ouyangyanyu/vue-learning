@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性绑定和双向数据数据绑定</title>
+    <script src="vue.js"></script>
+<body>
+        <div id="root">
+            <div v-bind:title="title">hello world</div>
+            <input v-model="content"/>
+            <div>{{content}}</div>
+            <!--
+                v-vind和v-model的区别：
+                一个是属性绑定（一个变了另一个不会变），一个是双向的绑定（两个一起变化）
+            -->
+
+        </div>
+        <script>
+            new Vue({
+                el : "#root",
+                data : {
+                    title : "this is hello world",
+                    content : "this is content"    
+                }
+            })
+        </script>
+</body>
+</head>

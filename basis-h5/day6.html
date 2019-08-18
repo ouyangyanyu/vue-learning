@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todolist删除内容</title>
+    <script src="vue.js"></script>
+<body>
+        <div id="root">
+            <div>
+                <input v-model="inputValue"/>
+                <button @click="submit">提交</button>
+            </div>
+            <ul>
+                <todo-item 
+                v-for="(item , index) of list"
+                :key="index" 
+                :content="item"
+                :index="index"
+                @delete="handleDelete"></todo-item>
+            </ul>
+        </div>
+        <script>
+
+       // Vue.component('todo-item',{  //全局组件
+       //     template : "<li>item</li>"
+       // })
+
+        Vue.component('todo-item',{ //局部组件,每个组件都是一个实列
+            props : ['content','index'],
+            template : '<li @click="contentClick">{{content}} ,{{index}} </li>',
+            methods :{
+                contentClick : function(){
+                   this.$emit('delete',this.index)
+                }
+            }
+        })
+
+
+            new Vue({
+                el : "#root",
+                data : {
+                    inputValue : 'hello',
+                    list : []
+                },
+                methods :{
+                    submit : function(){
+                        this.list.push(this.inputValue);
+                        this.inputValue = '';
+                    },
+                    handleDelete :function(index){
+                        this.list.splice(index,1)
+                    }
+                }
+            })
+        </script>
+</body>
+</head>
